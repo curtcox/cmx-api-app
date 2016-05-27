@@ -129,7 +129,7 @@ puts "SECRET is #{SECRET}"
 VALIDATOR = ENV['VALIDATOR']
 puts "VALIDATOR is #{VALIDATOR}"
 
-db = 'postgres:///localhost/mydb'
+db = ENV['DATABASE_URL']
 puts "Writing database to #{db}"
 
 # ---- Load anonimization data --------
