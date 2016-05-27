@@ -1,2 +1,4 @@
 source 'https://rubygems.org'
-gem 'rack'
+gem 'sinatra'
+gem 'data_mapper'
+gem 'dm-sqlite-adapter'
