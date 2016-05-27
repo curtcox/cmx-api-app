@@ -84,10 +84,10 @@
 # message like this:
 #
 #   [2013-03-26T11:51:57.920806 #25266]  INFO -- : AP 11:22:33:44:55:66 on ["5th Floor"]:
-#   {"ipv4"=>"123.45.67.89", "location"=>{"lat"=>37.77050089978862, "lng"=>-122.38686903158863, 
+#   {"ipv4"=>"123.45.67.89", "location"=>{"lat"=>37.77050089978862, "lng"=>-122.38686903158863,
 #   "unc"=>11.39537928078731}, "seenTime"=>"2014-05-15T15:48:14Z", "ssid"=>"Cisco WiFi",
 #   "os"=>"Linux", "clientMac"=>"aa:bb:cc:dd:ee:ff",
-#   "seenEpoch"=>1400168894, "rssi"=>16, "ipv6"=>nil, "manufacturer"=>"Meraki"} 
+#   "seenEpoch"=>1400168894, "rssi"=>16, "ipv6"=>nil, "manufacturer"=>"Meraki"}
 #
 # After your first client pushes start arriving (this may take a minute or two),
 # you can get a JSON blob describing the last client probe using:
@@ -124,31 +124,12 @@ use Rack::Deflater
 
 # ---- Parse command-line arguments ----
 
-if ARGV.size < 2
-  # The sinatra gem parses the -o and -p options for us.
-  puts "usage: sample_push_api_server.rb [-o <addr>] [-p <port>] <secret> <validator>"
-  exit 1
-end
-
-argOff = 0
-
-if ARGV[0] == '-o' or ARGV[0] == '-p'
-  argOff += 2
-end
-if ARGV[2] == '-o' or ARGV[2] == '-p'
-  argOff += 2
-end
-
-SECRET = ARGV[argOff]
+SECRET = ENV['SECRET']
 puts "SECRET is #{SECRET}"
-VALIDATOR = ARGV[argOff + 1]
+VALIDATOR = ENV['VALIDATOR']
 puts "VALIDATOR is #{VALIDATOR}"
 
-if ARGV.size > argOff + 2
-  db = "sqlite:/tmp/" + ARGV[argOff + 2]
-else
-  db = "sqlite:memory:"
-end
+db = "sqlite:memory:"
 puts "Writing database to #{db}"
 
 # ---- Load anonimization data --------
