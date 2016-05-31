@@ -59,6 +59,7 @@ end
 post '/events' do
   if request.media_type != "application/json"
     logger.warn "got post with unexpected content type: #{request.media_type}"
+    logger.warn "body: #{request.body}"
     return
   end
   request.body.rewind
