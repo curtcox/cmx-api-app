@@ -64,6 +64,7 @@ post '/events' do
   end
   request.body.rewind
   map = JSON.parse(request.body.read)
+  puts map
   if map['secret'] != SECRET
     logger.warn "got post with bad secret: #{map['secret']}"
     return
